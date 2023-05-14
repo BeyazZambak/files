@@ -12,5 +12,18 @@ with open('recipes.txt', encoding='utf8') as recipes:
         recipes.readline()
         cook_book[dish_name] = ingredients
 
-print(cook_book)
+
+def get_shop_list_by_dishes(dishes, person_count):
+    shop_list_by_dishes = {}
+    for dish in dishes:
+        for dish_name, ingredients in cook_book.items():
+            if dish_name == dish:
+                for ingredient in ingredients:
+                    ingredient_name, quantity, measure = ingredient.values()
+                    measure_quantity_dict = {'measure': measure, 'quantity': int(quantity) * person_count}
+                    shop_list_by_dishes[ingredient_name] = measure_quantity_dict
+    print(shop_list_by_dishes)
+
+get_shop_list_by_dishes(['Утка по-пекински', 'Омлет'], 10)
+
 
